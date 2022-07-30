@@ -17,10 +17,13 @@ jobs:
         python-version: [ 3.9 ]
     steps:
       - uses: actions/checkout@v3
+      - name: Set tag var
+        id: vars
+        run: echo ::set-output name=docker_tag::$(echo testcompare-servicemock:$(date +%s))
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag testcompare-servicemock:$(date +%s)
+        run: docker build . --file Dockerfile --tag ${{ steps.vars.outputs.docker_tag }}
       - name: Run the Docker image
-        run: docker run -d -p 5000:5000 testcompare-servicemock:latest
+        run: docker run -d -p 5000:5000 ${{ steps.vars.outputs.docker_tag }}
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v3
         with:
