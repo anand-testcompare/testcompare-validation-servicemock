@@ -11,8 +11,23 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    strategy:
+      max-parallel: 1
+      matrix:
+        python-version: [ 3.9 ]
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag testcompare-servicemock:$(date +%s)
+      - name: Run the Docker image
+        run: docker run -d -p 5000:5000 testcompare-servicemock:latest
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Python for testing Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run Python Unit Tests
+        run: python -m unittest discover test/
