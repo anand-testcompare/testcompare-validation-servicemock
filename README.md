@@ -1,10 +1,11 @@
 # TestCompare ServiceMock: Supporting Functionality for Testing TestCompare #
 
-_Flask code to create simulated APIs_ 
+Flask utilities for creating simulated APIs as part of the [TestCompare](https://testcompare.ai/) platform.
 
 ## Table of contents
 * [Release Log](#release-log)
-* [Gettng Started](#getting-started)
+* [Getting Started](#getting-started)
+* [Docker](#docker)
 * [Testing](#testing)
 * [License](#license)
 
@@ -25,10 +26,12 @@ pip install -r requirements.txt
 python app.py
 ```
 
-### NOT NEEDED force deploy the code on cloud run ###
+## Docker
+
+Build and run the container locally:
 ```
-#gcloud builds submit --tag gcr.io/compareme-325015/servicemock .
-#gcloud beta run deploy --image gcr.io/compareme-325015/servicemock
+docker build -t servicemock .
+docker run -p 5000:5000 servicemock
 ```
 
 
@@ -42,5 +45,5 @@ python -m unittest discover ./test -p '*.py'
 
 ## License
 
-Copyright © 2021 [Anand Pant](https://bitbucket.org/anandpant/)
+Copyright © 2025 TestCompare
 Released under the [MIT license](https://mit-license.org/).

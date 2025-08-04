@@ -1,8 +1,7 @@
 __author__ = "Anand Pant"
-__copyright__ = "Copyright (C) 2021 Anand Pant"
+__copyright__ = "Copyright (C) 2025 Anand Pant"
 __license__ = "MIT"
 __version__ = "0.0.1"
-__email__ = "anand@protrader.gg"
 
 from flask import request
 from app import app
@@ -37,8 +36,6 @@ def POST_v1_search_claim():
     respObj = reqProcessing.generateResponse(structure=structure)
 
     respProcessing = ResponseProcessing()
-
-    return respProcessing.createResponseJson(respObj=respObj)
 
 
 @app.route('/v2/search/claim', methods=['POST'])

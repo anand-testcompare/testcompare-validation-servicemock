@@ -1,8 +1,7 @@
 __author__ = "Anand Pant"
-__copyright__ = "Copyright (C) 2021 Anand Pant"
+__copyright__ = "Copyright (C) 2025 Anand Pant"
 __license__ = "MIT"
 __version__ = "0.0.1"
-__email__ = "anand@protrader.gg"
 
 
 import unittest
@@ -16,9 +15,6 @@ class TestDSMember(unittest.TestCase):
 
         body = {"memberId": "1"}
         data = requests.request(method="POST", json=body, url=url)
-        print("status_code:", data.status_code)
-        print("data:", data.text)
-
         self.assertEqual(data.status_code, 200)
         self.assertEqual(
             json.loads(data.text),
@@ -30,9 +26,6 @@ class TestDSMember(unittest.TestCase):
 
         body = {"memberId": "1"}
         data = requests.request(method="GET", params=body, url=url)
-        print("status_code:", data.status_code)
-        print("data:", data.text)
-
         self.assertEqual(data.status_code, 200)
         self.assertEqual(
             json.loads(data.text),
@@ -44,9 +37,6 @@ class TestDSMember(unittest.TestCase):
 
         body = {"memberId": "9"}
         data = requests.request(method="GET", params=body, url=url)
-        print("status_code:", data.status_code)
-        print("data:", data.text)
-
         self.assertEqual(data.status_code, 404)
         self.assertEqual(
             json.loads(data.text),
