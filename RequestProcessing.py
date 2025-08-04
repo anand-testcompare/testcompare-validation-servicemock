@@ -1,8 +1,7 @@
 __author__ = "Anand Pant"
-__copyright__ = "Copyright (C) 2021 Anand Pant"
+__copyright__ = "Copyright (C) 2025 Anand Pant"
 __license__ = "MIT"
 __version__ = "0.0.1"
-__email__ = "anand@protrader.gg"
 
 import json
 
@@ -36,10 +35,7 @@ class RequestProcessing:
         except Exception as e:
             username = ""
             password = ""
-            print(e)
 
-        print("Username:", username)
-        print("Password:", password)
         if username != "im_a_user" or password != "im_a_password":
             return {
                 "body": {
@@ -55,9 +51,7 @@ class RequestProcessing:
             header_key = headers["x-api-key"]
         except Exception as e:
             header_key = ""
-            print(e)
 
-        print("X-API-Key:", header_key)
         if header_key != "012345abcde":
             return {
                 "body": {
@@ -78,18 +72,11 @@ class RequestProcessing:
         try:
             bodyKeys = list(set(self.body.keys()))
             dataKeys = list(set(self.data[0].keys()))
-            print(bodyKeys, dataKeys)
-
             differenceKeys = listDifference(bodyKeys, dataKeys)
-            print(differenceKeys)
             if len(differenceKeys) >= len(dataKeys):
                 return {"body": [], "status_code": 400}
 
             filtered = self.data
-
-            print(self.body)
-            print(self.data)
-
             for key, value in self.body.items():
                 filtered = [x for x in filtered if x[key] == value]
             if len(filtered) == 0:
@@ -103,7 +90,6 @@ class RequestProcessing:
         data = self.generateResponseFlat()
         body = data['body']
         # print(json.dumps(body, indent=4))
-        print(structure)
 
         if data['status_code'] == 200:
             typeManipulation(output=structure, data=body)

@@ -1,8 +1,7 @@
 __author__ = "Anand Pant"
-__copyright__ = "Copyright (C) 2021 Anand Pant"
+__copyright__ = "Copyright (C) 2025 Anand Pant"
 __license__ = "MIT"
 __version__ = "0.0.1"
-__email__ = "anand@protrader.gg"
 
 from flask import request
 from app import app
@@ -13,8 +12,6 @@ import json
 
 
 def basic_auth_check(username, password):
-    print("Username:", username)
-    print("Password:", password)
     if username != "im_a_user" or password != "im_a_password":
         response = app.response_class(
             response=json.dumps({"error_message": "401 Basic Auth Check Failed: Invalid Username or Password"}),
